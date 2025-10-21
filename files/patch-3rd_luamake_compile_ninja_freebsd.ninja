@@ -1,0 +1,11 @@
+--- 3rd/luamake/compile/ninja/freebsd.ninja.orig	2025-10-21 17:08:03 UTC
++++ 3rd/luamake/compile/ninja/freebsd.ninja
+@@ -104,7 +104,7 @@ rule link_bootstrap
+ build $obj/source_bootstrap/main.obj: cxx_source_bootstrap $
+     bee.lua/bootstrap/main.cpp
+ rule link_bootstrap
+-  command = $cc $in -o $out -Wl,-E -lm -linotify -L/usr/local/lib -pthread $
++  command = $cc $in -o $out -Wl,-E -lm -L/usr/local/lib -pthread $
+     -Wl,--push-state,-Bstatic -lstdc++ -Wl,--pop-state -Wl,-S,-x
+   description = Link    Exe $out
+ rule copy
