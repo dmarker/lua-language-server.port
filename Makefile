@@ -13,10 +13,6 @@ WWW=		https://luals.github.io
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-#BUILD_DEPENDS=	lua54:lang/lua54 \
-#		unzip:archivers/unzip \
-#		ninja:devel/ninja
-
 USES=           zip tar dos2unix lua:build ninja:make
 DOS2UNIX_REGEX= .*\.(cpp|h|lua|md|obj)
 SUB_FILES=	lua-language-server
@@ -33,6 +29,11 @@ GH_ACCOUNT=	LuaLS
 GH_PROJECT=	${PORTNAME:tl}
 GH_TAGNAME=	${DISTVERSION}
 
+# This passes tests without libinotify but failed when using it.
+# I don't know if libinotify (which worked on FreeBSD-14 with older versions of
+# bee/lua-language-server) will still work.
+IGNORE_FreeBSD_14="missing native inotify"
+IGNORE_FreeBSD_13="missing native inotify"
 
 # I'm sure there is a better way I just don't know it...
 # And if I try to let the bsd.port.mk handle extract it complains about zip for submodules.
@@ -42,6 +43,10 @@ do-extract:
 		-C ${WRKDIR}
 	@${UNZIP_CMD} -uo ${DISTDIR}/${PORTNAME}-${PORTVERSION}-submodules.zip \
 		-d ${WRKSRC}
+
+post-patch:
+	${REINPLACE_CMD} -e 's|%LOCALBASE%|${LOCALBASE}|' ${WRKSRC}/3rd/bee.lua/compile/common.lua
+	${REINPLACE_CMD} -e 's|%LOCALBASE%|${LOCALBASE}|' ${WRKSRC}/3rd/luamake/compile/ninja/freebsd.ninja
 
 do-build:
 	cd ${WRKSRC}/3rd/luamake && compile/build.sh

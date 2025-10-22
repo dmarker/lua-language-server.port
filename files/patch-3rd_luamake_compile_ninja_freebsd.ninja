@@ -1,11 +1,20 @@
---- 3rd/luamake/compile/ninja/freebsd.ninja.orig	2025-10-21 17:08:03 UTC
+--- 3rd/luamake/compile/ninja/freebsd.ninja.orig	2025-06-25 09:46:10 UTC
 +++ 3rd/luamake/compile/ninja/freebsd.ninja
+@@ -22,7 +22,7 @@ rule cxx_source_bee_1
+ build $obj/source_bee/format.obj: cxx_source_bee bee.lua/3rd/fmt/format.cc
+ rule cxx_source_bee_1
+   command = $cc -MMD -MT $out -MF $out.d -std=c++17 -fno-rtti -O2 -Wall $
+-    -fvisibility=hidden -Ibee.lua -isystem /usr/local/include -DNDEBUG -o $
++    -fvisibility=hidden -Ibee.lua -isystem %LOCALBASE%/include -DNDEBUG -o $
+     $out -c $in
+   description = Compile C++ $out
+   deps = gcc
 @@ -104,7 +104,7 @@ rule link_bootstrap
  build $obj/source_bootstrap/main.obj: cxx_source_bootstrap $
      bee.lua/bootstrap/main.cpp
  rule link_bootstrap
 -  command = $cc $in -o $out -Wl,-E -lm -linotify -L/usr/local/lib -pthread $
-+  command = $cc $in -o $out -Wl,-E -lm -L/usr/local/lib -pthread $
++  command = $cc $in -o $out -Wl,-E -lm -L%LOCALBASE%/lib -pthread $
      -Wl,--push-state,-Bstatic -lstdc++ -Wl,--pop-state -Wl,-S,-x
    description = Link    Exe $out
  rule copy
