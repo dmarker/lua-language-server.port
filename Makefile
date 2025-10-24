@@ -18,7 +18,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 IGNORE_FreeBSD_13="missing native inotify"
 IGNORE_FreeBSD_14="missing native inotify"
 
-USES=		zip:infozip tar dos2unix lua:build ninja:make
+USES=		tar dos2unix lua:build ninja:make
 DOS2UNIX_REGEX= .*\.(cpp|h|lua|md|obj)
 USE_GITHUB=	yes
 GH_ACCOUNT=	LuaLS
@@ -41,8 +41,8 @@ do-extract:
 	@${MKDIR} ${WRKSRC}
 	@${TAR} zxf ${DISTDIR}/LuaLS-${PKGNAME}_GH0.tar.gz \
 		-C ${WRKDIR}
-	@${UNZIP_CMD} -uo ${DISTDIR}/${PKGNAME}-submodules.zip \
-		-d ${WRKSRC}
+	@${TAR} zxf ${DISTDIR}/${PKGNAME}-submodules.zip \
+		-C ${WRKSRC}
 
 post-patch:
 	${REINPLACE_CMD} -e 's|%LOCALBASE%|${LOCALBASE}|' ${WRKSRC}/3rd/bee.lua/compile/common.lua
