@@ -14,9 +14,3 @@ server. It functions as an LSP client, supporting:
 * Code formatting
 * Spell checking
 * Custom plugins
-
-
-
-lua-language-server is the LSP for lua. It runs its own self contained
-lua derived environment, bee which near as I can tell uses a rube-goldberg
-machine to build and drive me mad.
