@@ -3,6 +3,8 @@
 [12]: https://github.com/actboy168/bee.lua/pull/44/commits/99fc9ebe5619
 [13]: https://man.freebsd.org/cgi/man.cgi?query=inotify&manpath=FreeBSD+15.0-STABLE
 [14]: https://en.wikipedia.org/wiki/Rube_Goldberg_machine
+[15]: https://luals.github.io/
+[16]: https://github.com/LuaLS/lua-language-server/issues/2896
 
 # WARNING
 
@@ -13,11 +15,7 @@ It can be worked around with:
 # sysctl net.inet.tcp.syncache.see_other=1
 ```
 
-I have been building ports as `root` in a jail that only builds ports for a long time.
-This is bad as I didn't test building as normal user and that fails on 15.
-
-Basically this is not ready for anything but stable/15 at the moment and only if you
-build as root. Work continues...
+[lua-language-server][15] has a known race in one of the tests, see [issue/2896][16].
 
 # lua-language-server.port
 
