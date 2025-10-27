@@ -7,6 +7,11 @@
 # WARNING
 
 Attempting to build on FreeBSD main (in bhyve at least) is causing OS kernel panic.
+This seems to only happen whein 8gb or more of RAM.
+It can be worked around with:
+```
+# sysctl net.inet.tcp.syncache.see_other=1
+```
 
 I have been building ports as `root` in a jail that only builds ports for a long time.
 This is bad as I didn't test building as normal user and that fails on 15.
