@@ -5,6 +5,7 @@
 [14]: https://en.wikipedia.org/wiki/Rube_Goldberg_machine
 [15]: https://luals.github.io/
 [16]: https://github.com/LuaLS/lua-language-server/issues/2896
+[17]: https://github.com/freebsd/freebsd-src/commit/44cb1e857f0
 
 # WARNING
 
@@ -14,6 +15,7 @@ It can be worked around with:
 ```
 # sysctl net.inet.tcp.syncache.see_other=1
 ```
+This is fixed with [44cb1e8][17] in main now.
 
 [lua-language-server][15] has a known race in one of the tests, see [issue/2896][16].
 
