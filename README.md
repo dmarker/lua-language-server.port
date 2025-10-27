@@ -4,6 +4,16 @@
 [13]: https://man.freebsd.org/cgi/man.cgi?query=inotify&manpath=FreeBSD+15.0-STABLE
 [14]: https://en.wikipedia.org/wiki/Rube_Goldberg_machine
 
+# WARNING
+
+Attempting to build on FreeBSD main (in bhyve at least) is causing OS kernel panic.
+
+I have been building ports as `root` in a jail that only builds ports for a long time.
+This is bad as I didn't test building as normal user and that fails on 15.
+
+Basically this is not ready for anything but stable/15 at the moment and only if you
+build as root. Work continues...
+
 # lua-language-server.port
 
 A FreeBSD port.
