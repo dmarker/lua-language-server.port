@@ -50,9 +50,14 @@ post-patch:
 	${REINPLACE_CMD} -e 's|%WRKDIR%|${WRKDIR}|' ${WRKSRC}/3rd/luamake/bee.lua/test/test.lua
 	${REINPLACE_CMD} -e 's|%WRKDIR%|${WRKDIR}|' ${WRKSRC}/3rd/bee.lua/test/test.lua
 
+# `luamake all` instead of `luamake rebuild` because there is a flaky test
 do-build:
 	cd ${WRKSRC}/3rd/luamake && compile/build.sh
-	cd ${WRKSRC} && 3rd/luamake/luamake rebuild
+	cd ${WRKSRC} && 3rd/luamake/luamake all
+
+# you may hit https://github.com/LuaLS/lua-language-server/issues/2896
+do-test:
+	cd ${WRKSRC} && 3rd/luamake/luamake unit-test
 
 do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}/bin

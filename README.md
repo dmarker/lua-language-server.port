@@ -40,4 +40,6 @@ and the version we eventually care about.
 
 I'm just pulling everything back together and getting things to build.
 Right now, using the native [inotify(2)][13], it builds and passes all of
-its tests (which are part of the build, no I can't change this [build][14]).
+its tests. I can't prevent the bee.lua tests but as of now it only runs
+the lua-language-server tests if you do `make test`. That gets around the
+flaky test case for automated building.
