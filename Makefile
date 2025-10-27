@@ -55,10 +55,6 @@ do-build:
 	cd ${WRKSRC}/3rd/luamake && compile/build.sh
 	cd ${WRKSRC} && 3rd/luamake/luamake all
 
-# you may hit https://github.com/LuaLS/lua-language-server/issues/2896
-do-test:
-	cd ${WRKSRC} && 3rd/luamake/luamake unit-test
-
 do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}/bin
 	${INSTALL_SCRIPT} ${WRKDIR}/lua-language-server ${STAGEDIR}${PREFIX}/bin
@@ -67,5 +63,9 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/debugger.lua ${STAGEDIR}${DATADIR}
 	${INSTALL_DATA} ${WRKSRC}/main.lua ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC} && ${COPYTREE_SHARE} "locale meta script" ${STAGEDIR}${DATADIR}
+
+# you may hit https://github.com/LuaLS/lua-language-server/issues/2896
+do-test:
+	cd ${WRKSRC} && 3rd/luamake/luamake unit-test
 
 .include <bsd.port.mk>
