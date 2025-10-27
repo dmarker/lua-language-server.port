@@ -47,6 +47,7 @@ do-extract:
 post-patch:
 	${REINPLACE_CMD} -e 's|%LOCALBASE%|${LOCALBASE}|' ${WRKSRC}/3rd/bee.lua/compile/common.lua
 	${REINPLACE_CMD} -e 's|%LOCALBASE%|${LOCALBASE}|' ${WRKSRC}/3rd/luamake/compile/ninja/freebsd.ninja
+	${REINPLACE_CMD} -e 's|%WRKDIR%|${WRKDIR}|' ${WRKSRC}/3rd/luamake/bee.lua/test/test.lua
 
 do-build:
 	cd ${WRKSRC}/3rd/luamake && compile/build.sh
