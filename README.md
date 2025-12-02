@@ -32,11 +32,6 @@ Requires the new [inotify(2)][13] so stable/15 and above.
 ```
 
 The real credit is to [markjdb][11] for tracking down the SIGBUS in bee
-[here][12]. That has to be fed through both the luamake version of bee
-and the version we eventually care about.
-
-I'm just pulling everything back together and getting things to build.
-Right now, using the native [inotify(2)][13], it builds and passes all of
-its tests. I can't prevent the bee.lua tests but as of now it only runs
-the lua-language-server tests if you do `make test`. That gets around the
-flaky test case for automated building.
+[here][12]. That has been merged to both versions of bee.lua this port needs.
+So really just adjusting everything to use [inotify(2)][13]. Still has flaky
+test but it does pass sometimes.
