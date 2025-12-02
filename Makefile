@@ -1,11 +1,7 @@
 PORTNAME=	lua-language-server
-PORTVERSION=	3.15.0
+PORTVERSION=	3.16.0
 CATEGORIES=	devel
                                                        
-# Fortunately they bundled all the submodules for us now.
-MASTER_SITES=	https://github.com/LuaLS/lua-language-server/releases/download/${PORTVERSION}/
-DISTFILES=	${PKGNAME}-submodules.zip
-
 MAINTAINER=	dave@freedave.net
 COMMENT=	Lua development server and LSP client
 WWW=		https://luals.github.io
@@ -25,6 +21,18 @@ GH_ACCOUNT=	LuaLS
 GH_PROJECT=	${PORTNAME}
 GH_TAGNAME=	${DISTVERSION}
 
+# Put these in order of # https://github.com/LuaLS/lua-language-server/tree/5f1226d/3rd
+# But there is one more `bee.lua` for `luamake` and it doesn't necessarily have the same
+# SHA. Have to follow the 3rd/luamake and see what it wants.
+GH_TUPLE=	cppcxy:EmmyLuaCodeStyle:8500f3a:emmyluacodestyle/3rd/EmmyLuaCodeStyle \
+		actboy168:bee.lua:dd7853f:bee/3rd/bee.lua \
+		actboy168:json.lua:aff2a3d:json/3rd/json.lua \
+		love2d-community:love-api:8536392:love/3rd/love-api \
+		bjornbytes:lovr-docs:e89c753:lovr/3rd/lovr-api \
+		sqmedeiros:lpeglabel:912b0b9:lpeglabel/3rd/lpeglabel \
+		actboy168:luamake:0e90778:luamake/3rd/luamake \
+		actboy168:bee.lua:f242926:bee_luamake/3rd/luamake/bee.lua
+
 SUB_FILES=	lua-language-server
 
 PLIST_FILES=	bin/lua-language-server \
@@ -34,15 +42,6 @@ PLIST_FILES=	bin/lua-language-server \
 		${DATADIR_REL}/main.lua
 
 PORTDATA=	locale meta script
-
-# I'm sure there is a better way I just don't know it...
-# And if I try to let the bsd.port.mk handle extract it complains about zip for submodules.
-do-extract:
-	@${MKDIR} ${WRKSRC}
-	@${TAR} zxf ${DISTDIR}/LuaLS-${PKGNAME}_GH0.tar.gz \
-		-C ${WRKDIR}
-	@${TAR} zxf ${DISTDIR}/${PKGNAME}-submodules.zip \
-		-C ${WRKSRC}
 
 post-patch:
 	${REINPLACE_CMD} -e 's|%LOCALBASE%|${LOCALBASE}|' ${WRKSRC}/3rd/bee.lua/compile/common.lua

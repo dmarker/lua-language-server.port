@@ -31,11 +31,6 @@ Requires the new [inotify(2)][13] so stable/15 and above.
 # make install clean
 ```
 
-I wish I had seen that there was a prior port that was removed [here][10].
-I never noticed `MOVED`. Would have saved some time, but its probably good
-as this way I invested time in using the release and submodule assets to build.
-Or maybe that's a bad thing.
-
 The real credit is to [markjdb][11] for tracking down the SIGBUS in bee
 [here][12]. That has to be fed through both the luamake version of bee
 and the version we eventually care about.

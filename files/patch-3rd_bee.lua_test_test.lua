@@ -1,6 +1,6 @@
---- 3rd/bee.lua/test/test.lua.orig	2025-10-27 15:47:55 UTC
+--- 3rd/bee.lua/test/test.lua.orig	2025-12-02 15:52:43 UTC
 +++ 3rd/bee.lua/test/test.lua
-@@ -42,7 +42,7 @@ do
+@@ -53,7 +53,7 @@ do
      if lt.options.touch then
          lt.options.touch = fs.absolute(lt.options.touch):string()
      end
