@@ -7,24 +7,16 @@
 [16]: https://github.com/LuaLS/lua-language-server/issues/2896
 [17]: https://github.com/freebsd/freebsd-src/commit/44cb1e857f0
 [18]: https://www.freshports.org/devel/libinotify/
-
-# WARNING
-
-Attempting to build on FreeBSD main (in bhyve at least) is causing OS kernel panic.
-This seems to only happen whein 8gb or more of RAM.
-It can be worked around with:
-```
-# sysctl net.inet.tcp.syncache.see_other=1
-```
-This is fixed with [44cb1e8][17] in main now.
-
-[lua-language-server][15] has a known race in one of the tests, see [issue/2896][16].
+[19]: https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=291371
 
 # lua-language-server.port
 
 A FreeBSD port.
+
 3.16.0 works on stable/14 with [devel/libinotify][18] from ports.
 stable/15 works with the new [inotify(2)][13].
+
+Working on getting this into ports now. So you shouldn't need this much longer.
 
 ```
 # cd /usr/ports/devel
