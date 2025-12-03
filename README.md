@@ -6,6 +6,7 @@
 [15]: https://luals.github.io/
 [16]: https://github.com/LuaLS/lua-language-server/issues/2896
 [17]: https://github.com/freebsd/freebsd-src/commit/44cb1e857f0
+[18]: https://www.freshports.org/devel/libinotify/
 
 # WARNING
 
@@ -22,7 +23,8 @@ This is fixed with [44cb1e8][17] in main now.
 # lua-language-server.port
 
 A FreeBSD port.
-Requires the new [inotify(2)][13] so stable/15 and above.
+3.16.0 works on stable/14 with [devel/libinotify][18] from ports.
+stable/15 works with the new [inotify(2)][13].
 
 ```
 # cd /usr/ports/devel

@@ -9,10 +9,13 @@ WWW=		https://luals.github.io
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-# This passes tests without libinotify but failed when using it.
-# Last version I could get working with libinotify was 3.7.5
-IGNORE_FreeBSD_13="missing native inotify"
-IGNORE_FreeBSD_14="missing native inotify"
+# This passes tests with and without libinotify for 3.16.0!
+# But I don't have a stable/13 to test ...
+#IGNORE_FreeBSD_13="missing native inotify"
+
+# conditionally bring in libinotify for stable/14 and below
+# XXX this doesn't work. chicken and egg we need OSVERSION defined
+LIB_DEPENDS+=   ${LIBINOTIFY}
 
 USES=		tar dos2unix lua:build ninja:make
 DOS2UNIX_REGEX= .*\.(cpp|h|lua|md|obj)
@@ -45,7 +48,9 @@ PORTDATA=	locale meta script
 
 post-patch:
 	${REINPLACE_CMD} -e 's|%LOCALBASE%|${LOCALBASE}|' ${WRKSRC}/3rd/bee.lua/compile/common.lua
+	${REINPLACE_CMD} -e 's|%INOTIFY%|${INOTIFY}|' ${WRKSRC}/3rd/bee.lua/compile/common.lua
 	${REINPLACE_CMD} -e 's|%LOCALBASE%|${LOCALBASE}|' ${WRKSRC}/3rd/luamake/compile/ninja/freebsd.ninja
+	${REINPLACE_CMD} -e 's|%LINK_INOTIFY%|${LINK_INOTIFY}|' ${WRKSRC}/3rd/luamake/compile/ninja/freebsd.ninja
 	${REINPLACE_CMD} -e 's|%WRKDIR%|${WRKDIR}|' ${WRKSRC}/3rd/luamake/bee.lua/test/test.lua
 	${REINPLACE_CMD} -e 's|%WRKDIR%|${WRKDIR}|' ${WRKSRC}/3rd/bee.lua/test/test.lua
 
@@ -67,4 +72,13 @@ do-install:
 do-test:
 	cd ${WRKSRC} && 3rd/luamake/luamake unit-test
 
-.include <bsd.port.mk>
+.include <bsd.port.pre.mk>
+#.include <bsd.port.mk>
+
+.if ${OSVERSION} < 1500050
+LIBINOTIFY=	libinotify.so:devel/libinotify
+INOTIFY=	links = "inotify",
+LINK_INOTIFY=	-linotify
+.endif
+
+.include <bsd.port.post.mk>

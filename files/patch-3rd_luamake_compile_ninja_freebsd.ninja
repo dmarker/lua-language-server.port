@@ -14,7 +14,7 @@
      bee.lua/bootstrap/main.cpp
  rule link_bootstrap
 -  command = $cc $in -o $out -Wl,-E -linotify -L/usr/local/lib -pthread -lm $
-+  command = $cc $in -o $out -Wl,-E -L%LOCALBASE%/lib -pthread -lm $
++  command = $cc $in -o $out -Wl,-E %LINK_INOTIFY% -L%LOCALBASE%/lib -pthread -lm $
      -Wl,--push-state,-Bstatic -lstdc++ -Wl,--pop-state -Wl,-S,-x
    description = Link    Exe $out
  rule copy
@@ -23,7 +23,7 @@
    pool = console
  rule link_luamake
 -  command = $cc $in -o $out -linotify -L/usr/local/lib -pthread -lm $
-+  command = $cc $in -o $out -L%LOCALBASE%/lib -pthread -lm $
++  command = $cc $in -o $out %LINK_INOTIFY% -L%LOCALBASE%/lib -pthread -lm $
      -lstdc++ -Wl,-S,-x
    description = Link    Exe $out
  rule build_luamake_test
