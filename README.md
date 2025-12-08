@@ -17,6 +17,11 @@ A FreeBSD port.
 stable/15 works with the new [inotify(2)][13].
 
 Working on getting this into ports now. So you shouldn't need this much longer.
+This will appear very shortly. There have been fixes you will want to pick up
+more LuaCATS (for popular languages including thoses used by neovim).
+
+I'm going to leave this here for now but this is merged and I'll be doing my best
+to maintain it going forward.
 
 ```
 # cd /usr/ports/devel
