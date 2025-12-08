@@ -23,6 +23,8 @@ more LuaCATS (for popular languages including thoses used by neovim).
 I'm going to leave this here for now but this is merged and I'll be doing my best
 to maintain it going forward.
 
+People are still grabbing so I'm updating to where official port will be.
+
 ```
 # cd /usr/ports/devel
 # git clone https://github.com/dmarker/lua-language-server.port.git lua-language-server
